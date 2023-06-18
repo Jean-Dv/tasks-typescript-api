@@ -1,4 +1,5 @@
 import { Server } from './server'
+import type * as http from 'http'
 
 /**
  * The Mooc Backend App.
@@ -8,6 +9,10 @@ import { Server } from './server'
  */
 export class MoocBackendApp {
   server?: Server
+
+  get httpServer(): http.Server | undefined {
+    return this.server?.getHttpServer()
+  }
 
   /**
    * Starts the app.

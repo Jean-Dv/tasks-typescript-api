@@ -54,6 +54,15 @@ export class Server {
   }
 
   /**
+   * Gets the HTTP server.
+   *
+   * @returns The HTTP server.
+   */
+  getHttpServer(): http.Server | undefined {
+    return this.httpServer
+  }
+
+  /**
    * Starts the HTTP server.
    *
    * @returns A promise that resolves when the server has started.
