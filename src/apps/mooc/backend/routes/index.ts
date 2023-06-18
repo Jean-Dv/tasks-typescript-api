@@ -1,5 +1,5 @@
 import { type Router } from 'express'
-import glob from 'glob'
+import { globSync } from 'glob'
 import path from 'path'
 
 /**
@@ -21,7 +21,7 @@ async function register(routePath: string, router: Router): Promise<void> {
  * @returns A promise that resolves when all routes have been registered.
  */
 export function registerRoutes(router: Router): void {
-  const routes = glob.globSync(path.join(__dirname, '**/*.route.ts'))
+  const routes = globSync(path.join(__dirname, '**/*.route.ts'))
   routes.forEach((route) => {
     void register(route, router)
   })
