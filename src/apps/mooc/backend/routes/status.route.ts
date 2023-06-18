@@ -1,5 +1,6 @@
 import { type Router, type Request, type Response } from 'express'
-import StatusGetController from '../controllers/StatusGetController'
+import type StatusGetController from '../controllers/StatusGetController'
+import container from '../dependency-injection'
 
 /**
  * Registers the status route.
@@ -8,7 +9,9 @@ import StatusGetController from '../controllers/StatusGetController'
  * @returns Nothing.
  */
 export const register = (router: Router): void => {
-  const controller: StatusGetController = new StatusGetController()
+  const controller: StatusGetController = container.get(
+    'Apps.mooc.controllers.StatusGetController'
+  )
   router.get('/status', (req: Request, res: Response) => {
     controller.run(req, res)
   })

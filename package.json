@@ -57,6 +57,7 @@
     "express-promise-router": "4.1.1",
     "glob": "10.2.7",
     "helmet": "7.0.0",
-    "http-status": "1.6.2"
+    "http-status": "1.6.2",
+    "node-dependency-injection": "2.6.11"
   }
 }
