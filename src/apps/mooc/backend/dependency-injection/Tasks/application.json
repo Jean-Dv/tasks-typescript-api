@@ -1,0 +1,12 @@
+{
+  "services": {
+    "Mooc.Tasks.application.TaskCreator": {
+      "class": "../../../../../Contexts/Mooc/Tasks/application/TaskCreator",
+      "arguments": ["@Mooc.Tasks.domain.TaskRepository"]
+    },
+    "Mooc.Tasks.domain.TaskRepository": {
+      "class": "../../../../../Contexts/Mooc/Tasks/infrastructure/persistence/FileTaskRepository",
+      "arguments": [""]
+    }
+  }
+}

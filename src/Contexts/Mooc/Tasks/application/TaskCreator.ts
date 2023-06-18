@@ -10,7 +10,7 @@ export class TaskCreator {
     description: string,
     status: string
   ): Promise<void> {
-    const task = new Task(id, title, description, status)
+    const task = new Task({ id, title, description, status })
     await this.repository.save(task)
   }
 }

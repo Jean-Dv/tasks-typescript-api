@@ -4,10 +4,15 @@ export class Task {
   readonly description: string
   readonly status: string
 
-  constructor(id: string, title: string, description: string, status: string) {
-    this.id = id
-    this.title = title
-    this.description = description
-    this.status = status
+  constructor(params: {
+    id: string
+    title: string
+    description: string
+    status: string
+  }) {
+    this.id = params.id
+    this.title = params.title
+    this.description = params.description
+    this.status = params.status
   }
 }

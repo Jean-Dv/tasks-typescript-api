@@ -6,7 +6,7 @@
     },
     "Apps.mooc.controllers.TaskPutController": {
       "class": "../../controllers/TaskPutController",
-      "arguments": []
+      "arguments": ["@Mooc.Tasks.application.TaskCreator"]
     }
   }
 }

@@ -12,7 +12,7 @@ describe('TaskCreator', () => {
     const title = 'Task 1'
     const description = 'Description 1'
     const status = 'pending'
-    const expectedTask = new Task(id, title, description, status)
+    const expectedTask = new Task({ id, title, description, status })
 
     await creator.run(id, title, description, status)
     expect(repository.save).toHaveBeenCalledWith(expectedTask)
