@@ -9,7 +9,7 @@
     "lint:fix": "eslint ./src/**/*.ts --fix",
     "prettier": "prettier --check .",
     "prettier:fix": "prettier --write .",
-    "test": "pnpm run test:unit",
+    "test": "pnpm run test:unit && pnpm run test:features",
     "test:unit": "NODE_ENV=test jest",
     "test:features": "pnpm run test:mooc:backend:features",
     "test:mooc:backend:features": "NODE_ENV=test cucumber-js -p mooc_backend",

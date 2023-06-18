@@ -1,0 +1,31 @@
+name: Node CI
+
+on: [push]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node-version: [18.x]
+
+    steps:
+      - uses: actions/checkout@v1
+      - name: Use Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - uses: pnpm/action-setup@v2
+        with:
+          version: latest
+      - name: pnpm install
+        run: |
+          pnpm install
+      - name: pnpm run build
+        run: |
+          pnpm run build --if-present
+          pnpm run lint
+      - name: pnpm run test
+        run: |
+          pnpm run test
