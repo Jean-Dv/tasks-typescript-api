@@ -1,7 +1,11 @@
 {
   "services": {
     "Apps.mooc.controllers.StatusGetController": {
-      "class": "../../controllers/StatusGetController.ts",
+      "class": "../../controllers/StatusGetController",
+      "arguments": []
+    },
+    "Apps.mooc.controllers.TaskPutController": {
+      "class": "../../controllers/TaskPutController",
       "arguments": []
     }
   }
