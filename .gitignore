@@ -6,3 +6,4 @@ logs/
 data/
 test-results.xml
 .vscode/settings.json
+*.repo
