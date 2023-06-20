@@ -22,15 +22,20 @@ export class Task {
    *    status: 'pending'
    * })
    */
-  constructor(params: {
+  constructor({
+    id,
+    title,
+    description,
+    status
+  }: {
     id: string
     title: string
     description: string
     status: string
   }) {
-    this.id = params.id
-    this.title = params.title
-    this.description = params.description
-    this.status = params.status
+    this.id = id
+    this.title = title
+    this.description = description
+    this.status = status
   }
 }

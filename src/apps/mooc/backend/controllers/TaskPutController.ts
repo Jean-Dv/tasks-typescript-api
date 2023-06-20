@@ -39,7 +39,7 @@ export class TaskPutController implements Controller {
   async run(req: TaskPutRequest, res: Response): Promise<void> {
     try {
       const { id, title, description, status } = req.body
-      await this.taskCreator.run(id, title, description, status)
+      await this.taskCreator.run({ id, title, description, status })
       res.status(httpStatus.CREATED).send()
     } catch (error) {
       res.status(httpStatus.INTERNAL_SERVER_ERROR).send()

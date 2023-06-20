@@ -17,7 +17,7 @@ describe('TaskCreator', () => {
     const status = 'pending'
     const expectedTask = new Task({ id, title, description, status })
 
-    await creator.run(id, title, description, status)
+    await creator.run({ id, title, description, status })
     repository.assertSaveHaveBeenCalledWith(expectedTask)
   })
 })

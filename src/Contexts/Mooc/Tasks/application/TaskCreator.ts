@@ -1,5 +1,6 @@
 import { Task } from '../domain/Task'
 import { type TaskRepository } from '../domain/TaskRepository'
+import { type CreateTaskRequest } from './CreateTaskRequest'
 
 /**
  * Create a new Task
@@ -20,13 +21,13 @@ export class TaskCreator {
    * @param {string} status
    * @returns {Promise<void>}
    */
-  async run(
-    id: string,
-    title: string,
-    description: string,
-    status: string
-  ): Promise<void> {
-    const task = new Task({ id, title, description, status })
+  async run(request: CreateTaskRequest): Promise<void> {
+    const task = new Task({
+      id: request.id,
+      title: request.title,
+      description: request.description,
+      status: request.status
+    })
     await this.repository.save(task)
   }
 }
