@@ -1,7 +1,7 @@
-import { BSON } from 'bson'
+import { serialize, deserialize } from 'bson'
 import fs from 'fs'
 import path from 'path'
-import { type Task } from '../../domain/Task'
+import { Task } from '../../domain/Task'
 import { type TaskRepository } from '../../domain/TaskRepository'
 
 /**
@@ -17,7 +17,18 @@ export class FileTaskRepository implements TaskRepository {
    * @returns {Promise<void>}
    */
   async save(task: Task): Promise<void> {
-    await fs.promises.writeFile(this.filePath(task.id), BSON.serialize(task))
+    await fs.promises.writeFile(this.filePath(task.id), serialize(task))
+  }
+
+  /**
+   * Search a task by id
+   * @param {string} taskId - Task id
+   * @returns {Promise<Task>}
+   */
+  async search(taskId: string): Promise<Task> {
+    const taskData = await fs.promises.readFile(this.filePath(taskId))
+    const { id, title, description, status } = deserialize(taskData)
+    return new Task({ id, title, description, status })
   }
 
   /**

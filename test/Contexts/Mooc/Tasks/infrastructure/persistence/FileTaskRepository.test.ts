@@ -1,16 +1,18 @@
 import { Task } from '../../../../../../src/Contexts/Mooc/Tasks/domain/Task'
 import { FileTaskRepository } from '../../../../../../src/Contexts/Mooc/Tasks/infrastructure/persistence/FileTaskRepository'
 
-describe('Save Task', () => {
-  it('should have a task', async () => {
+describe('FileTaskRepository', () => {
+  it('should save a task', async () => {
     const repository = new FileTaskRepository()
-    const task = new Task({
+    const expectedTask = new Task({
       id: '1',
       title: 'Task 1',
       description: 'Description 1',
       status: 'pending'
     })
 
-    await repository.save(task)
+    await repository.save(expectedTask)
+    const task = await repository.search('1')
+    expect(task).toEqual(expectedTask)
   })
 })
