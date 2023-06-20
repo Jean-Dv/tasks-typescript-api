@@ -1,9 +1,11 @@
+import { type TaskId } from '../../Shared/domain/Tasks/TaskId'
+
 /**
  * Task entity
  * @param {object} params
  */
 export class Task {
-  readonly id: string
+  readonly id: TaskId
   readonly title: string
   readonly description: string
   readonly status: string
@@ -28,7 +30,7 @@ export class Task {
     description,
     status
   }: {
-    id: string
+    id: TaskId
     title: string
     description: string
     status: string

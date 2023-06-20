@@ -17,7 +17,7 @@ export class FileTaskRepository implements TaskRepository {
    * @returns {Promise<void>}
    */
   async save(task: Task): Promise<void> {
-    await fs.promises.writeFile(this.filePath(task.id), serialize(task))
+    await fs.promises.writeFile(this.filePath(task.id.value), serialize(task))
   }
 
   /**

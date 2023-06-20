@@ -1,3 +1,4 @@
+import { TaskId } from '../../Shared/domain/Tasks/TaskId'
 import { Task } from '../domain/Task'
 import { type TaskRepository } from '../domain/TaskRepository'
 import { type CreateTaskRequest } from './CreateTaskRequest'
@@ -23,7 +24,7 @@ export class TaskCreator {
    */
   async run(request: CreateTaskRequest): Promise<void> {
     const task = new Task({
-      id: request.id,
+      id: new TaskId(request.id),
       title: request.title,
       description: request.description,
       status: request.status
