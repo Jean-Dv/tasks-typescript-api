@@ -10,7 +10,7 @@ Feature: Create a new task
       "id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
       "title": "Task 1",
       "description": "Description 1",
-      "status": "open"
+      "status": "IN_PROGRESS"
     }
     """
     Then the response status code should be 201
@@ -23,7 +23,7 @@ Feature: Create a new task
       "id": "ef8ac118-8d7f-49cc-abec-78e0d05af80a",
       "title": 1,
       "description": "Description 1",
-      "status": "invalid"
+      "status": "PENDING"
     }
     """
     Then the response status code should be 422

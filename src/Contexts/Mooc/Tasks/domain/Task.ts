@@ -1,4 +1,7 @@
 import { type TaskId } from '../../Shared/domain/Tasks/TaskId'
+import { type TaskDescription } from './TaskDescription'
+import { type TaskState } from './TaskState'
+import { type TaskTitle } from './TaskTitle'
 
 /**
  * Task entity
@@ -6,9 +9,9 @@ import { type TaskId } from '../../Shared/domain/Tasks/TaskId'
  */
 export class Task {
   readonly id: TaskId
-  readonly title: string
-  readonly description: string
-  readonly status: string
+  readonly title: TaskTitle
+  readonly description: TaskDescription
+  readonly status: TaskState
 
   /**
    * @param {object} params
@@ -31,9 +34,9 @@ export class Task {
     status
   }: {
     id: TaskId
-    title: string
-    description: string
-    status: string
+    title: TaskTitle
+    description: TaskDescription
+    status: TaskState
   }) {
     this.id = id
     this.title = title

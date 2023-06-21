@@ -1,6 +1,9 @@
 import { TaskId } from '../../Shared/domain/Tasks/TaskId'
 import { Task } from '../domain/Task'
+import { TaskDescription } from '../domain/TaskDescription'
 import { type TaskRepository } from '../domain/TaskRepository'
+import { TaskStatus } from '../domain/TaskStatus'
+import { TaskTitle } from '../domain/TaskTitle'
 import { type CreateTaskRequest } from './CreateTaskRequest'
 
 /**
@@ -25,9 +28,9 @@ export class TaskCreator {
   async run(request: CreateTaskRequest): Promise<void> {
     const task = new Task({
       id: new TaskId(request.id),
-      title: request.title,
-      description: request.description,
-      status: request.status
+      title: new TaskTitle(request.title),
+      description: new TaskDescription(request.description),
+      status: TaskStatus.STATES.getValue(request.status)
     })
     await this.repository.save(task)
   }
