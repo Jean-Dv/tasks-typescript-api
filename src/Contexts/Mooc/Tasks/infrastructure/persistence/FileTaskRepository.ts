@@ -3,6 +3,10 @@ import fs from 'fs'
 import path from 'path'
 import { Task } from '../../domain/Task'
 import { type TaskRepository } from '../../domain/TaskRepository'
+import { TaskId } from '../../../Shared/domain/Tasks/TaskId'
+import { TaskTitle } from '../../domain/TaskTitle'
+import { TaskDescription } from '../../domain/TaskDescription'
+import { TaskState } from '../../domain/TaskState'
 
 /**
  * File implementation for Task repository
@@ -28,7 +32,12 @@ export class FileTaskRepository implements TaskRepository {
   async search(taskId: string): Promise<Task> {
     const taskData = await fs.promises.readFile(this.filePath(taskId))
     const { id, title, description, status } = deserialize(taskData)
-    return new Task({ id, title, description, status })
+    return new Task({
+      id: new TaskId(id.value),
+      title: new TaskTitle(title.value),
+      description: new TaskDescription(description.value),
+      status: new TaskState(status.value)
+    })
   }
 
   /**

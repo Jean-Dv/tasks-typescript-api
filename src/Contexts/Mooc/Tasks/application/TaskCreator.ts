@@ -2,7 +2,7 @@ import { TaskId } from '../../Shared/domain/Tasks/TaskId'
 import { Task } from '../domain/Task'
 import { TaskDescription } from '../domain/TaskDescription'
 import { type TaskRepository } from '../domain/TaskRepository'
-import { TaskStatus } from '../domain/TaskStatus'
+import { TaskState } from '../domain/TaskState'
 import { TaskTitle } from '../domain/TaskTitle'
 import { type CreateTaskRequest } from './CreateTaskRequest'
 
@@ -30,7 +30,7 @@ export class TaskCreator {
       id: new TaskId(request.id),
       title: new TaskTitle(request.title),
       description: new TaskDescription(request.description),
-      status: TaskStatus.STATES.getValue(request.status)
+      status: new TaskState(request.status)
     })
     await this.repository.save(task)
   }
