@@ -1,32 +1,30 @@
-import { Task } from '../../../../../src/Contexts/Mooc/Tasks/domain/Task'
 import { TaskCreator } from '../../../../../src/Contexts/Mooc/Tasks/application/TaskCreator'
+import { TaskTitleLengthExceeded } from '../../../../../src/Contexts/Mooc/Tasks/domain/TaskTitleLengthExceeded'
 import { TaskRepositoryMock } from '../__mocks__/TaskRepositoryMock'
-import { TaskId } from '../../../../../src/Contexts/Mooc/Shared/domain/Tasks/TaskId'
-import { TaskTitle } from '../../../../../src/Contexts/Mooc/Tasks/domain/TaskTitle'
-import { TaskDescription } from '../../../../../src/Contexts/Mooc/Tasks/domain/TaskDescription'
-import { TaskStatus } from '../../../../../src/Contexts/Mooc/Tasks/domain/TaskStatus'
+import { TaskMother } from '../domain/TaskMother'
+import { CreateTaskRequestMother } from './CreateTaskRequestMother'
 
+let repository: TaskRepositoryMock
+let creator: TaskCreator
 describe('TaskCreator', () => {
-  let repository: TaskRepositoryMock
-
   beforeEach(() => {
     repository = new TaskRepositoryMock()
+    creator = new TaskCreator(repository)
   })
 
   it('should create a valid task', async () => {
-    const creator = new TaskCreator(repository)
-    const id = 'fb966fc1-4b03-4e5e-ad92-efbb399a0f78'
-    const title = 'Task 1'
-    const description = 'Description 1'
-    const status = 'IN_PROGRESS'
-    const expectedTask = new Task({
-      id: new TaskId(id),
-      title: new TaskTitle(title),
-      description: new TaskDescription(description),
-      status: TaskStatus.STATES.getValue('IN_PROGRESS')
-    })
+    const request = CreateTaskRequestMother.random()
+    const task = TaskMother.fromRequest(request)
+    await creator.run(request)
+    repository.assertSaveHaveBeenCalledWith(task)
+  })
 
-    await creator.run({ id, title, description, status })
-    repository.assertSaveHaveBeenCalledWith(expectedTask)
+  it('should throw error if task title length is exceeded', async () => {
+    await expect(async () => {
+      const request = CreateTaskRequestMother.invalidRequest()
+      const task = TaskMother.fromRequest(request)
+      await creator.run(request)
+      repository.assertSaveHaveBeenCalledWith(task)
+    }).rejects.toThrow(TaskTitleLengthExceeded)
   })
 })
